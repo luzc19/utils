@@ -1,6 +1,5 @@
 // 转化为 xx=yy&aa=bb 形式
 function toParamsStr(params){
-
     let paramsStr = '';
     for(let key in params){
         paramsStr += '&' + key + '=' + params[key];
