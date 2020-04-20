@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>java class 转 TS</title>
+</head>
+<body>
+<div>
+  <div>转化不完全，请注意修正</div>
+  <textarea id="input-class" style="width: 500px;height: 500px;"></textarea>
+  <button id="convert">转化</button>
+  <textarea id="convert-output"  style="width: 500px;height: 500px;"></textarea>
+</div>
+<script type="text/javascript">
+function convert(str) {
+  let keywordsMap = {
+    'Date': 'number',
+    'String': 'string',
+    'Integer': 'number',
+    'Boolean': 'boolean',
+    'boolean': 'boolean',
+  }
+  let resultStr = str;
+  Object.keys(keywordsMap).forEach((key) => {
+    let reg = new RegExp(key+'(.+)(?=;)', 'g');
+    resultStr = resultStr.replace(reg, function(str, $1) {
+      const field = $1.replace(' ', '')
+      return field + ': ' + keywordsMap[key];
+    })
+  });
+  return resultStr;
+}
+function handler() {
+  let str = document.querySelector('#input-class').value;
+  let outputNode = document.querySelector('#convert-output');
+  outputNode.value = convert(str);
+}
+document.querySelector('#convert').addEventListener('click', handler)
+document.querySelector('#input-class').addEventListener('input', handler)
+</script>
+</body>
+</html>
