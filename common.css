@@ -1,0 +1,198 @@
+html,body {
+  margin:0;
+  font-family:'Microsoft YaHei','Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+}
+
+ul {
+  padding: 0;
+  margin:0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: #1679DB;
+}
+a:link,a:hover,a:visited,a:active {
+  text-decoration: none;
+}
+* {
+  box-sizing: border-box;
+}
+img {
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+button,input{
+  font-family:'Microsoft YaHei','Avenir', Helvetica, Arial, sans-serif;
+}
+label { display: inline-block; }
+.hidden {
+  display: none;
+}
+.pointer {
+  cursor: pointer;
+}
+.fl {
+  float: left;
+}
+.fr {
+  float: right;
+}
+.pr {
+  position: relative;
+}
+.flex {
+  display: flex;
+}
+.flex1 {
+  flex: 1;
+}
+.flex2 {
+  flex: 2;
+}
+.flex3 {
+  flex: 3;
+}
+.flex4 {
+  flex: 4;
+}
+.flex5 {
+  flex: 5;
+}
+.dib {
+  display: inline-block;
+}
+.clearfix:before,.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-success {
+  color: #5cb85c;
+}
+.text-danger {
+  color: #e60012;
+}
+.text-primary {
+  color: #1679DB;
+}
+.text-strong {
+  color: #e60012;
+}
+.text-button+.text-button {
+  margin-left: 10px;
+}
+.bg-gray {
+  background: #f7f7f7;
+}
+.bg-light-gray {
+  background: #fcfcfc;
+}
+
+.bold {
+  font-weight: bold;
+}
+.fs12 {
+  font-size: 12px;
+}
+.fs13 {
+  font-size: 13px;
+}
+.fs14 {
+  font-size: 14px;
+}
+.fs16 {
+  font-size: 16px;
+}
+.fs18 {
+  font-size: 18px;
+}
+.fs20 {
+  font-size: 20px;
+}
+.w100p {
+  width: 100%;
+}
+.w50p {
+  width: 50%;
+}
+.border {
+  border: 1px solid #ddd;
+}
+
+.icon-necessary {
+  color: #E66454;
+  margin-left: -7px;
+}
+.img-thumb {
+  width: 40px;
+  height: 40px;
+  margin-right: 14px;
+}
+.button-submit {
+  width: 150px;
+}
+.button-back {
+  float: right;
+  width: 150px;
+}
+
+/*覆盖element默认样式*/
+.el-input.is-disabled .el-input__inner {
+  background-color: #f4f4f5;
+  color: #333;
+}
+.el-input-number-left .el-input__inner {
+  text-align: left;
+}
+
+.el-step__title.is-process, .el-step__head.is-process {
+  color: #e60012;
+  border-color: #e60012;
+}
+/* 页面背景基础设置 */
+.tab-frame {
+  background: #fafafa;
+  padding: 20px;
+}
+.tab-main {
+  padding: 25px 20px;
+  background: #fff;
+}
+
+/* 详情页 可选基础设置 */
+/* 底部悬浮 */
+.tab-frame-bottom {
+  margin-top: 20px;
+  position: relative;
+  min-height: 44px;
+
+}
+.tab-frame-bottom .content {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  border:1px solid #ddd;
+  box-shadow: 0 0 5px #ddd;
+  z-index: 100;
+  text-align: right;
+  padding: 15px;
+  height: 64px;
+}
