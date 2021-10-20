@@ -1,5 +1,41 @@
 import axios from 'axios';
-import { Notification } from 'element-ui';
+
+function checkAvailable() {
+  // 先检查浏览器是否支持
+  if (!('Notification' in window)) {
+    console.warn('浏览器不支持通知功能');
+    return Promise.reject(new Error('浏览器不支持通知功能'));
+  }
+  if (Notification.permission === 'granted') {
+    return Promise.resolve(true);
+  }
+  if (Notification.permission !== 'denied') {
+    // 否则我们需要向用户获取权限
+    return Notification.requestPermission().then((permission) => {
+      if (permission === 'granted') {
+        return true;
+      }
+      return Promise.reject(new Error('用户拒绝显示通知'));
+    });
+  }
+  return Promise.resolve();
+}
+export function send(title, option) {
+  checkAvailable()
+    .then(() => {
+      console.log('send then');
+      new Notification(title, option);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+function showTips(data) {
+  // 提示示例，可以使用各种UI库的notification，也可以使用浏览器的API Notification
+  send(data.title || '提示', {
+    body: data.message,
+  });
+}
 
 let ready = false;
 function getReady() {
@@ -16,15 +52,6 @@ function getReady() {
   });
 }
 
-function showTips(data) {
-  Notification({
-    title: data.title || '提示',
-    message: data.message,
-    type: data.type || 'info',
-    duration: 10000,
-  });
-}
-
 let websocketLink = null;
 function closeLink() {
   if (websocketLink !== null) {
@@ -37,7 +64,9 @@ function setLink() {
     return Promise.resolve(websocketLink);
   }
   const retryInterval = 3 * 60 * 1000;
-  let websocket = new WebSocket(`ws://${document.location.host}/api/websocket/conn`);
+  let websocket = new WebSocket(
+    `ws://${document.location.host}/api/websocket/conn`,
+  );
   websocket.addEventListener('open', () => {
     websocketLink = websocket;
   });
@@ -53,7 +82,7 @@ function setLink() {
     try {
       showTips(JSON.parse(event.data));
     } catch (error) {
-      console.log('消息无法识别');
+      console.error('消息无法识别');
     }
   });
   const keepAliveInterval = 30 * 60 * 1000;
@@ -66,7 +95,7 @@ function setLink() {
   }, keepAliveInterval);
 }
 
-export default {
+const op = {
   connect() {
     return getReady().then(setLink);
   },
@@ -75,3 +104,5 @@ export default {
     closeLink();
   },
 };
+
+export default op;
