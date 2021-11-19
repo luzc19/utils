@@ -1,0 +1,24 @@
+import { isEqual } from 'lodash';
+// 缓存一定时间内的请求
+// 暂时只支持一个参数的请求
+let cacheParams = [];
+let cacheResults = [];
+export function requestCache(fn, duration) {
+  return (args) => {
+    const cacheIndex = cacheParams.findIndex(item => isEqual(item, params));
+    const isCacheExisted = cacheIndex > -1;
+
+    if (!isCacheExisted) {
+      const newCache = fn(args);
+      cacheParams.push(params);
+      cacheResults.push(newCache);
+
+      setTimeout(() => {
+        cacheParams = [];
+        cacheResults = [];
+      }, duration);
+      return newCache;
+    }
+    return cacheResults[cacheIndex];
+  }
+}
