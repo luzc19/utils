@@ -4,12 +4,12 @@ import { isEqual } from 'lodash';
 let cacheParams = [];
 let cacheResults = [];
 export function requestCache(fn, duration) {
-  return (args) => {
+  return (params) => {
     const cacheIndex = cacheParams.findIndex(item => isEqual(item, params));
     const isCacheExisted = cacheIndex > -1;
 
     if (!isCacheExisted) {
-      const newCache = fn(args);
+      const newCache = fn(params);
       cacheParams.push(params);
       cacheResults.push(newCache);
 
